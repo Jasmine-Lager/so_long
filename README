@@ -1,0 +1,28 @@
+Make sure these images (assets) have the size defined by TILE_SIZE (default 32x32 pixels).
+# floor.xpm
+# wall.xpm
+# player.xpm
+# collectible.xpm
+# exit_closed.xpm (Exit when items remain)
+# exit_open.xpm (Exit when all items collected)
+
+Example maps/map1.ber:
+11111111111
+100C00000E1dmake 
+10111101101
+1P0C1001001
+11111111111
+
+Running the Game
+MAKE, than execute the compiled program, passing the path to your map file as an argument:
+# ./so_long maps/map1.ber
+
+The game window should appear.
+# Use the W, A, S, D keys to move the player.
+
+The current move count will be printed to the terminal window where you launched the game after each valid move.
+Collect all the collectibles ('C'). The exit ('E') appearance might change (if you use exit_open.xpm).
+Move to the exit ('E') after collecting all items to win.
+Press the ESC key or click the window's close button to quit the game.
+
+
