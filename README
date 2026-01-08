@@ -1,28 +1,163 @@
-Make sure these images (assets) have the size defined by TILE_SIZE (default 32x32 pixels).
-# floor.xpm
-# wall.xpm
-# player.xpm
-# collectible.xpm
-# exit_closed.xpm (Exit when items remain)
-# exit_open.xpm (Exit when all items collected)
+# so_long
 
-Example maps/map1.ber:
-11111111111
-100C00000E1dmake 
-10111101101
-1P0C1001001
-11111111111
+A 2D game project built in C using the MiniLibX graphics library. Navigate through maps, collect items, and find your way to the exit!
 
-Running the Game
-MAKE, than execute the compiled program, passing the path to your map file as an argument:
-# ./so_long maps/map1.ber
+![Game Demo](so_long.gif)
 
-The game window should appear.
-# Use the W, A, S, D keys to move the player.
+## Table of Contents
 
-The current move count will be printed to the terminal window where you launched the game after each valid move.
-Collect all the collectibles ('C'). The exit ('E') appearance might change (if you use exit_open.xpm).
-Move to the exit ('E') after collecting all items to win.
-Press the ESC key or click the window's close button to quit the game.
+- [About](#about)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Controls](#controls)
+- [Map Format](#map-format)
+- [Project Structure](#project-structure)
+- [Technical Details](#technical-details)
+
+## About
+
+so_long is a simple 2D game where the player must collect all collectibles on the map and reach the exit with the minimum number of moves. This project is part of the 42 curriculum and focuses on window management, event handling, textures, and basic gameplay mechanics.
+
+## Features
+
+- ✨ 2D tile-based rendering
+- 🎮 Smooth player movement
+- 🎯 Collectible items system
+- 🗺️ Custom map support
+- 📊 Move counter display
+- ✅ Map validation system
+- 🎨 Custom sprites and textures
+
+## Installation
+
+### Prerequisites
+
+- GCC compiler
+- Make
+- MiniLibX library (included in most 42 School environments)
+
+### Build
+
+Clone the repository and compile the project:
+
+```bash
+git clone <your-repository-url>
+cd so_long
+make
+```
+
+This will create the `so_long` executable.
+
+### Clean
+
+```bash
+make clean   # Remove object files
+make fclean  # Remove object files and executable
+make re      # Recompile everything
+```
+
+## Usage
+
+Run the game with a valid map file:
+
+```bash
+./so_long maps/map.ber
+```
+
+Replace `map.ber` with the path to your desired map file.
+
+## Controls
+
+| Key | Action |
+|-----|--------|
+| `W` or `↑` | Move up |
+| `A` or `←` | Move left |
+| `S` or `↓` | Move down |
+| `D` or `→` | Move right |
+| `ESC` | Exit game |
+
+## Map Format
+
+Maps are stored in `.ber` files with the following components:
+
+- `1` - Wall
+- `0` - Empty space
+- `C` - Collectible
+- `E` - Exit
+- `P` - Player starting position
+
+### Map Rules
+
+- Map must be rectangular and surrounded by walls (`1`)
+- Must contain exactly one exit (`E`)
+- Must contain exactly one starting position (`P`)
+- Must contain at least one collectible (`C`)
+- Must have a valid path from player to all collectibles and exit
+
+### Example Map
+
+```
+111111
+1P0C01
+100001
+1C00E1
+111111
+```
+
+## Project Structure
+
+```
+so_long/
+├── assets/              # Game sprites and textures
+├── libft/              # Custom C library
+├── maps/               # Map files (.ber)
+├── Makefile            # Build configuration
+├── README.md           # Project documentation
+├── game_hooks.c        # Event and hook handlers
+├── game_init.c         # Game initialization
+├── game_render.c       # Rendering logic
+├── game_render_utils.c # Rendering helper functions
+├── game_utils.c        # General game utilities
+├── main.c              # Program entry point
+├── map_reader.c        # Map file parsing
+├── map_reader_utils.c  # Map reading helpers
+├── map_validation.c    # Map validation logic
+├── map_validation_utils.c # Validation helpers
+└── so_long.h           # Header file with declarations
+```
+
+## Technical Details
+
+### Modules
+
+**Game Engine**
+- `game_init.c` - Initializes game state, window, and graphics
+- `game_hooks.c` - Handles keyboard input and window events
+- `game_render.c` - Main rendering loop and sprite drawing
+- `game_utils.c` - Helper functions for game logic
+
+**Map System**
+- `map_reader.c` - Parses .ber map files
+- `map_validation.c` - Validates map structure and playability
+- Uses flood-fill algorithm to ensure valid paths
+
+**Graphics**
+- Built with MiniLibX
+- Tile-based rendering system
+- Sprite management through texture loading
+
+### Libraries Used
+
+- **libft** - Custom C library with standard functions
+- **MiniLibX** - Graphics library for window management and rendering
+
+## Author
+
+Created as part of the 42 School curriculum.
+
+## License
+
+This project is part of 42 School's educational program.
 
 
